@@ -13,14 +13,14 @@ export class ComponentFactoryService {
   }
 
   resolveComponentFactory<T>(name: string): ComponentFactory<T> {
-    const { component } = this.factories.find((_) => _.name === name);
+    try {
+      const { component } = this.factories.find((_) => _.name === name);
 
-    if (component === undefined) {
+      return this.resolver.resolveComponentFactory(component);
+    } catch {
       throw new Error(
         `Component with name ${name} is not part of the current module - add it in the forRoot method of the module`
       );
     }
-
-    return this.resolver.resolveComponentFactory(component);
   }
 }
