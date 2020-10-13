@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 import { ElementDirective } from '../../directives';
 import { StyleClasses } from '../../interfaces';
@@ -9,17 +9,27 @@ import { JSONComponentBase } from '../../lib/JSONComponentBase';
   templateUrl: './base-element.component.html',
   styleUrls: ['./base-element.component.scss'],
 })
-export class BaseElementComponent implements OnInit {
+export class BaseElementComponent implements AfterViewInit {
   @Input('componentBase') componentBase: JSONComponentBase;
-  @ViewChild(ElementDirective, { static: true }) element: ElementDirective;
-
+  @ViewChild(ElementDirective)
+  componentElement: ElementDirective;
+  @ViewChild('nativeElement') nativeElement: ElementRef<any>;
   public styles: StyleClasses;
 
   constructor() {}
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
+    if (this.componentBase.isAngularComponent)
+      return this.initAngularComponent();
+
+    this.initNativeElement();
+  }
+
+  initAngularComponent() {
     const factory = this.componentBase.componentFactory;
-    const componentRef = this.element.viewContainerRef.createComponent(factory);
+    const componentRef = this.componentElement.viewContainerRef.createComponent(
+      factory
+    );
     componentRef.instance.definition = this.componentBase;
     componentRef.instance.style = this.componentBase.styles;
 
@@ -31,6 +41,16 @@ export class BaseElementComponent implements OnInit {
 
     if (this.componentBase.hasStyles) {
       componentRef.instance.styles = this.componentBase.styles;
+    }
+  }
+
+  initNativeElement() {
+    const nativeElement = this.nativeElement.nativeElement;
+
+    if (this.componentBase.hasProps) {
+      Object.entries(this.componentBase.props).forEach(
+        ([key, value]) => (nativeElement[key] = value)
+      );
     }
   }
 }

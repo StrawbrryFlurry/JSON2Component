@@ -1,6 +1,57 @@
-<ng-template elementHost> </ng-template>
-<span [ngSwitch]="">
-  <p *ngSwitchCase="true"></p>
-  <p *ngSwitchCase="false"></p>
-  <p *ngSwitchDefault></p>
+<ng-template *ngIf="componentBase.isAngularComponent" elementHost>
+</ng-template>
+
+<span [ngSwitch]="componentBase.type">
+  <p
+    #nativeElement
+    [ngStyle]="componentBase.hasStyles ? componentBase.styles : null"
+    *ngSwitchCase="'p'"
+  >
+    {{ componentBase.content }}
+    <span *ngFor="let child of componentBase.children">
+      <base-element [componentBase]="child"></base-element>
+    </span>
+  </p>
+  <h1
+    #nativeElement
+    [ngStyle]="componentBase.hasStyles ? componentBase.styles : null"
+    *ngSwitchCase="'h1'"
+  >
+    {{ componentBase.content }}
+
+    <span *ngFor="let child of componentBase.children">
+      <base-element [componentBase]="child"></base-element>
+    </span>
+  </h1>
+  <h2
+    #nativeElement
+    [ngStyle]="componentBase.hasStyles ? componentBase.styles : null"
+    *ngSwitchCase="'h2'"
+  >
+    {{ componentBase.content }}
+
+    <span *ngFor="let child of componentBase.children">
+      <base-element [componentBase]="child"></base-element>
+    </span>
+  </h2>
+  <div
+    #nativeElement
+    [ngStyle]="componentBase.hasStyles ? componentBase.styles : null"
+    *ngSwitchCase="'div'"
+  >
+    {{ componentBase.content }}
+
+    <span *ngFor="let child of componentBase.children">
+      <base-element [componentBase]="child"></base-element>
+    </span>
+  </div>
+  <span *ngSwitchCase="'img'">
+    <img
+      #nativeElement
+      [ngStyle]="componentBase.hasStyles ? componentBase.styles : null"
+    />
+    <span *ngFor="let child of componentBase.children">
+      <base-element [componentBase]="child"></base-element>
+    </span>
+  </span>
 </span>

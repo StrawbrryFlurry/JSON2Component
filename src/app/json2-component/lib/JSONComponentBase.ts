@@ -1,6 +1,6 @@
 import { ComponentFactory, ComponentFactoryResolver, Type } from '@angular/core';
 
-import { JSONHTMLElement, NativeElement, NativeElementMap, StyleClasses } from '../interfaces';
+import { JSONHTMLElement, NativeElement, StyleClasses } from '../interfaces';
 import { IJSONComponentSchema } from '../interfaces/schema.interface';
 
 export const NATIVE_ELEMENTS: NativeElement[] = ['h1', 'div', 'img', 'p'];
@@ -11,6 +11,7 @@ export class JSONComponentBase {
   public props: { [key: string]: any };
   public data: string;
   public children: JSONComponentBase[];
+  public content: string;
 
   public componentFactory: ComponentFactory<any>;
 
@@ -21,6 +22,7 @@ export class JSONComponentBase {
     this.type = schema.type;
     this.props = schema.props;
     this.styles = schema.styles;
+    this.content = schema.content;
 
     if (!NATIVE_ELEMENTS.includes(this.type)) {
       const factories = Array.from(
@@ -40,11 +42,6 @@ export class JSONComponentBase {
       this.componentFactory = componentFactoryResolver.resolveComponentFactory(
         factoryClass
       );
-    } else {
-      const nativeComponentType = NativeElementMap[this.type];
-      this.componentFactory = componentFactoryResolver.resolveComponentFactory(
-        nativeComponentType
-      );
     }
 
     if (schema.children) {
@@ -63,7 +60,7 @@ export class JSONComponentBase {
   }
 
   get hasProps() {
-    return !!this.isAngularComponent && !!this.props;
+    return !!this.props;
   }
 
   get hasChildren() {

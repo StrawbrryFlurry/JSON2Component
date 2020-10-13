@@ -1,18 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { BaseElementComponent, JSONComponent, NativeElementComponent } from './components';
-import { HeadingOneComponent } from './components/native-elements/heading-one';
+import { BaseElementComponent, JSONComponent } from './components';
 import { ElementDirective } from './directives';
 
 @NgModule({
-  declarations: [
-    BaseElementComponent,
-    JSONComponent,
-    HeadingOneComponent,
-    ElementDirective,
-    NativeElementComponent,
-  ],
+  declarations: [BaseElementComponent, JSONComponent, ElementDirective],
   imports: [CommonModule],
   exports: [JSONComponent],
 })
