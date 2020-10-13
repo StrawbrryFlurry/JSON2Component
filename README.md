@@ -144,7 +144,7 @@ That schema can then be used in a template to dynamically create components from
 ### app.component.html
 
 ```HTML
-<json-component [template]="schema"></json-component>
+<json-component [template]="_schema"></json-component>
 ```
 
 Using this schema will result in the following preview
