@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { schema } from './json2-component';
+import { schema } from './shared/json2component';
 
 @Component({
   selector: 'app-root',
@@ -8,6 +8,5 @@ import { schema } from './json2-component';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'Test';
-  schema = schema;
+  _schema = schema;
 }

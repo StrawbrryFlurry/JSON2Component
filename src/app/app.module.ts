@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Json2ComponentModule } from './json2-component';
+import { Json2ComponentModule } from './shared/json2component';
 import { TestComponentComponent } from './test-component/test-component.component';
 
 @NgModule({

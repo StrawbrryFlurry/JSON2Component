@@ -4,7 +4,7 @@ import { JSONHTMLElement, NativeElement, StyleClasses } from '../interfaces';
 import { IJSONComponentSchema } from '../interfaces/schema.interface';
 import { ComponentFactoryService } from '../services';
 
-export const NATIVE_ELEMENTS: NativeElement[] = ['h1', 'div', 'img', 'p'];
+export const NATIVE_ELEMENTS: NativeElement[] = ['h1', 'h2', 'div', 'img', 'p'];
 
 export class JSONComponentBase {
   public type: JSONHTMLElement;
