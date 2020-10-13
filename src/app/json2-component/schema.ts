@@ -13,6 +13,9 @@ export const schema = ((): string =>
     },
     children: [
       {
+        type: 'test',
+      },
+      {
         type: 'p',
         content: 'Yoshiii',
       },

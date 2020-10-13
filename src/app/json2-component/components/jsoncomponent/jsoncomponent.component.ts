@@ -1,7 +1,8 @@
-import { Component, ComponentFactoryResolver, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 import { IJSONComponentSchema } from '../../interfaces';
 import { JSONComponentBase } from '../../lib/JSONComponentBase';
+import { ComponentFactoryService } from '../../services';
 
 @Component({
   selector: 'json-component',
@@ -13,9 +14,7 @@ export class JSONComponent implements OnChanges {
 
   public component: JSONComponentBase;
 
-  constructor(
-    private readonly componentFactoryResolver: ComponentFactoryResolver
-  ) {}
+  constructor(private readonly factoryService: ComponentFactoryService) {}
 
   ngOnChanges() {
     this.deserializeTemplate();
@@ -23,7 +22,7 @@ export class JSONComponent implements OnChanges {
 
   deserializeTemplate(): void {
     const template = JSON.parse(this.jsonTemplate) as IJSONComponentSchema;
-    const base = new JSONComponentBase(template, this.componentFactoryResolver);
+    const base = new JSONComponentBase(template, this.factoryService);
 
     this.component = base;
   }

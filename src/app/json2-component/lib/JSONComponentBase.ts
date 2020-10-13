@@ -1,7 +1,8 @@
-import { ComponentFactory, ComponentFactoryResolver, Type } from '@angular/core';
+import { ComponentFactory } from '@angular/core';
 
 import { JSONHTMLElement, NativeElement, StyleClasses } from '../interfaces';
 import { IJSONComponentSchema } from '../interfaces/schema.interface';
+import { ComponentFactoryService } from '../services';
 
 export const NATIVE_ELEMENTS: NativeElement[] = ['h1', 'div', 'img', 'p'];
 
@@ -17,7 +18,7 @@ export class JSONComponentBase {
 
   constructor(
     schema: IJSONComponentSchema,
-    componentFactoryResolver: ComponentFactoryResolver
+    factoryService: ComponentFactoryService
   ) {
     this.type = schema.type;
     this.props = schema.props;
@@ -25,28 +26,14 @@ export class JSONComponentBase {
     this.content = schema.content;
 
     if (!NATIVE_ELEMENTS.includes(this.type)) {
-      const factories = Array.from(
-        componentFactoryResolver['_factories'].keys()
-      );
-
-      const factoryClass = factories.find(
-        (factory: any) => factory.name === this.type
-      ) as Type<any>;
-
-      if (factoryClass === undefined) {
-        throw new Error(
-          `Component factory with name ${this.type} doesn't exist`
-        );
-      }
-
-      this.componentFactory = componentFactoryResolver.resolveComponentFactory(
-        factoryClass
+      this.componentFactory = factoryService.resolveComponentFactory(
+        schema.type
       );
     }
 
     if (schema.children) {
       this.children = schema.children.map(
-        (child) => new JSONComponentBase(child, componentFactoryResolver)
+        (child) => new JSONComponentBase(child, factoryService)
       );
     }
   }
