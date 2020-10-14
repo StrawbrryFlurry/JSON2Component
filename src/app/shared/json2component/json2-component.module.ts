@@ -10,7 +10,7 @@ import { _CONFIG } from './tokens';
 @NgModule({
   declarations: [BaseElementComponent, JSONComponent, ElementDirective],
   imports: [CommonModule],
-  exports: [JSONComponent],
+  exports: [JSONComponent, BaseElementComponent],
 })
 export class Json2ComponentModule {
   static forRoot(

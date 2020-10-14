@@ -12,13 +12,21 @@ export const schema = ((): string =>
     },
     children: [
       {
-        type: 'h1',
-        content: 'Things I like',
-      },
-      {
-        type: 'div',
+        type: 'custom-component',
+        props: {
+          title: 'Things I like',
+          customProps: {
+            someProp: ':3',
+          },
+        },
         styles: {
-          display: 'flex',
+          _h1: {
+            display: 'flex',
+            'justify-content': 'center',
+          },
+          _div: {
+            display: 'flex',
+          },
         },
         children: [
           {

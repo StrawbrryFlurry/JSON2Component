@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 
 import { ElementDirective } from '../../directives';
 import { StyleClasses } from '../../interfaces';
@@ -9,40 +9,40 @@ import { JSONComponentBase } from '../../lib/JSONComponentBase';
   templateUrl: './base-element.component.html',
   styleUrls: ['./base-element.component.scss'],
 })
-export class BaseElementComponent implements AfterViewInit {
+export class BaseElementComponent implements OnInit, AfterViewInit {
   @Input('componentBase') componentBase: JSONComponentBase;
-  @ViewChild(ElementDirective)
+  @ViewChild(ElementDirective, { static: true })
   componentElement: ElementDirective;
   @ViewChild('nativeElement') nativeElement: ElementRef<any>;
   public styles: StyleClasses;
 
   constructor() {}
 
-  ngAfterViewInit(): void {
-    if (this.componentBase.isAngularComponent)
-      return this.initAngularComponent();
+  ngOnInit(): void {
+    if (this.componentBase.isAngularComponent) this.initAngularComponent();
+  }
 
-    this.initNativeElement();
+  ngAfterViewInit(): void {
+    if (!this.componentBase.isAngularComponent) this.initNativeElement();
   }
 
   initAngularComponent() {
     const factory = this.componentBase.componentFactory;
-    const componentRef = this.componentElement.viewContainerRef.createComponent(
-      factory
-    );
-    componentRef.instance.definition = this.componentBase;
-    componentRef.instance.style = this.componentBase.styles;
-    componentRef.instance.template = this.componentBase;
+    const viewContainerRef = this.componentElement.viewContainerRef;
+    viewContainerRef.clear();
 
-    if (this.componentBase.hasProps) {
+    const componentRef = viewContainerRef.createComponent(factory);
+
+    componentRef.instance._definition = this.componentBase;
+    componentRef.instance._content = this.componentBase.content || undefined;
+    componentRef.instance._children = this.componentBase.children || undefined;
+    componentRef.instance._styles = this.componentBase.styles || undefined;
+    componentRef.instance._props = this.componentBase.props || undefined;
+
+    if (this.componentBase.hasProps)
       Object.entries(this.componentBase.props).forEach(
         ([key, value]) => (componentRef.instance[key] = value)
       );
-    }
-
-    if (this.componentBase.hasStyles) {
-      componentRef.instance.styles = this.componentBase.styles;
-    }
   }
 
   initNativeElement() {

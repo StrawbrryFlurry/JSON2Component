@@ -53,4 +53,8 @@ export class JSONComponentBase {
   get hasChildren() {
     return !!this.children && this.children?.length > 0;
   }
+
+  get hasContent() {
+    return !!this.content;
+  }
 }
