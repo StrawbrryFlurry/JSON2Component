@@ -32,6 +32,7 @@ export class BaseElementComponent implements AfterViewInit {
     );
     componentRef.instance.definition = this.componentBase;
     componentRef.instance.style = this.componentBase.styles;
+    componentRef.instance.template = this.componentBase;
 
     if (this.componentBase.hasProps) {
       Object.entries(this.componentBase.props).forEach(
