@@ -1,4 +1,4 @@
-# JSON2Component Angular Module
+# JSON2Component
 
 I got asked if there was an Angular library that does a similar thing to [json2react](https://github.com/txgruppi/json2react) - maybe there is - nonetheless we are here now with my somewhat whacky approch to it :P
 
@@ -44,7 +44,7 @@ The type of element being generated. For now this projects supports:
 - div
 - img
 
-Supported elements are also declared in listed in `interfaces/HTMLElement.type.ts/NativeElement`
+Supported elements are also declared and listed in `interfaces/HTMLElement.type.ts/NativeElement`
 
 ```JSON
 {
@@ -98,7 +98,7 @@ An object containing key value pairs that represent properties of an HTML elemen
 
 > This property is optional
 
-An array of Objects complient with the `IJSONComponentSchema` schema.
+An array of Objects complient with the `IJSONComponentSchema` interface.
 
 Specifing this property will insert new elements inside the parent.
 
