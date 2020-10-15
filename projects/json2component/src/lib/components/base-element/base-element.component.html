@@ -1,0 +1,49 @@
+<ng-template elementHost> </ng-template>
+
+<ng-template #renderChildren>
+  <span *ngFor="let child of componentBase.children">
+    <base-element [componentBase]="child"></base-element>
+  </span>
+</ng-template>
+
+<span [ngSwitch]="componentBase.type">
+  <p
+    #nativeElement
+    [ngStyle]="componentBase.hasStyles ? componentBase.styles : null"
+    *ngSwitchCase="'p'"
+  >
+    {{ componentBase.content }}
+    <ng-container *ngTemplateOutlet="renderChildren"></ng-container>
+  </p>
+  <h1
+    #nativeElement
+    [ngStyle]="componentBase.hasStyles ? componentBase.styles : null"
+    *ngSwitchCase="'h1'"
+  >
+    {{ componentBase.content }}
+    <ng-container *ngTemplateOutlet="renderChildren"></ng-container>
+  </h1>
+  <h2
+    #nativeElement
+    [ngStyle]="componentBase.hasStyles ? componentBase.styles : null"
+    *ngSwitchCase="'h2'"
+  >
+    {{ componentBase.content }}
+    <ng-container *ngTemplateOutlet="renderChildren"></ng-container>
+  </h2>
+  <div
+    #nativeElement
+    [ngStyle]="componentBase.hasStyles ? componentBase.styles : null"
+    *ngSwitchCase="'div'"
+  >
+    {{ componentBase.content }}
+    <ng-container *ngTemplateOutlet="renderChildren"></ng-container>
+  </div>
+  <span *ngSwitchCase="'img'">
+    <img
+      #nativeElement
+      [ngStyle]="componentBase.hasStyles ? componentBase.styles : null"
+    />
+    <ng-container *ngTemplateOutlet="renderChildren"></ng-container>
+  </span>
+</span>

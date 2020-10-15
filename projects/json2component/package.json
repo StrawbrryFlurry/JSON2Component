@@ -1,0 +1,28 @@
+{
+  "name": "json2component",
+  "version": "0.1.0",
+  "description": "A basic way of rendering json as angular components inspired by json2react.",
+  "author": "Michael (M1CH3L1US)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/M1CH3L1US/JSON2Component"
+  },
+  "bugs": {
+    "url": "https://github.com/M1CH3L1US/JSON2Component/issues"
+  },
+  "homepage": "https://github.com/M1CH3L1US/JSON2Component",
+  "keywords": [
+    "angular",
+    "javascript",
+    "typescript",
+    "json"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "~9.1.1",
+    "@angular/core": "~9.1.1"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}
