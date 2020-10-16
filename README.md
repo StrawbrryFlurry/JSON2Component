@@ -4,6 +4,9 @@ I've got the question if there was an Angular library that does a similar thing 
 
 If you have any suggestions for potential improvments I'd be grateful to hear them! 🍪
 
+# Live Example on StackBlitz
+https://json2component-example.stackblitz.io
+
 # Installation
 
 This project is on npm now! To install it just run the following command inside your angular project:
