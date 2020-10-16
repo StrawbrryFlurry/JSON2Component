@@ -5,6 +5,7 @@ I've got the question if there was an Angular library that does a similar thing 
 If you have any suggestions for potential improvments I'd be grateful to hear them! 🍪
 
 # Live Example on StackBlitz
+
 https://stackblitz.com/edit/json2component-example
 
 # Installation
@@ -269,6 +270,105 @@ Using this schema will result in the following preview
 ![alt text](https://raw.githubusercontent.com/M1CH3L1US/JSON2Component/master/.github/assets/schema_preview.png)
 
 ## Schema example code
+
+```JSON
+{
+  "type": "div",
+  "styles": {
+    "width": "100vw",
+    "display": "flex",
+    "align-items": "center",
+    "flex-direction": "column"
+  },
+  "children": [
+    {
+      "type": "custom-component",
+      "props": {
+        "title": "Things I like",
+        "customProps": { "someProp": ":3" }
+      },
+      "styles": {
+        "_h1": { "display": "flex", "justify-content": "center" },
+        "_div": { "display": "flex" }
+      },
+      "children": [
+        {
+          "type": "p",
+          "content": "Dogs",
+          "styles": {
+            "display": "flex",
+            "align-items": "center",
+            "flex-direction": "column",
+            "padding": "20px"
+          },
+          "children": [
+            {
+              "type": "img",
+              "props": {
+                "src": "https://images.pexels.com/photos/1805164/pexels-photo-1805164.jpeg"
+              },
+              "styles": { "margin-top": "10px", "max-width": "200px" }
+            }
+          ]
+        },
+        {
+          "type": "p",
+          "content": "Cookies",
+          "styles": {
+            "display": "flex",
+            "align-items": "center",
+            "flex-direction": "column",
+            "padding": "20px"
+          },
+          "children": [
+            {
+              "type": "img",
+              "props": {
+                "src": "https://images.pexels.com/photos/890577/pexels-photo-890577.jpeg"
+              },
+              "styles": { "margin-top": "10px", "max-height": "300px" }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "content": "Being able to center this div vertically",
+      "styles": {
+        "display": "flex",
+        "align-items": "center",
+        "flex-direction": "column"
+      },
+      "children": [
+        {
+          "type": "div",
+          "styles": {
+            "height": "250px",
+            "width": "500px",
+            "display": "flex",
+            "flex-direction": "column",
+            "justify-content": "center",
+            "align-items": "center",
+            "background-color": "#EFEFEF",
+            "margin-top": "10px"
+          },
+          "children": [
+            {
+              "type": "div",
+              "styles": {
+                "width": "100px",
+                "height": "100px",
+                "background-color": "#121212"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
 
 ```TS
 export const schema = ((): string =>
