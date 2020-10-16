@@ -5,7 +5,7 @@ I've got the question if there was an Angular library that does a similar thing 
 If you have any suggestions for potential improvments I'd be grateful to hear them! 🍪
 
 # Live Example on StackBlitz
-https://json2component-example.stackblitz.io
+https://stackblitz.com/edit/json2component-example?file=src/app/custom.component.ts
 
 # Installation
 
